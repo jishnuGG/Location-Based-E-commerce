@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Product Listing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #639fee;
+            color: white;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .logo-img {
+            height: 40px; /* Adjust based on your preferred size */
+            margin-right: 10px; /* Space between the logo and the text */
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #000000;
+        }
+
+        .locations {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background-color: #31495327;
+        }
+
+        .location-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            background-color: #ff6f61;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #ff3f31;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            width: calc(20% - 20px);
+            float: left;
+            margin-right: 20px;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .add-to-cart-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo" style="font-size: 50px;">
+            <img src="images/logo.png" alt="Logo" class="logo-img">
+            BigCom
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="go_admin">Admin</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="locations">
+    <div class="location-buttons">
+        <a href="gn" class="btn">Gandhipuram</a>
+        <a href="sn" class="btn">Singanallur</a>
+        <a href="uk" class="btn">Ukkadam</a>
+        <a href="pm" class="btn">Peelamedu</a>
+    </div>
+</section>
+
+<div class="container">
+    <th:block th:each="product: ${Inventory}">
+        <div class="product-card">
+            <div class="product-img"><img src="images/logo.png" alt="Product Image"></div>
+            <div class="product-info">
+                <div class="product-title" th:text="${product.name}">Product name</div>
+                <div class="product-price" th:text="'$' + ${product.price}">Price</div>
+                <div class="product-description" th:text="${product.count}">Stock</div>
+                <div class="product-description" th:text="${product.category_name}">Category</div>
+                <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+            </div>
+        </div>
+    </th:block>
+    <div class="clear"></div>
+</div>
+<script src="scripts.js"></script>
+</body>
+</html>
